@@ -4,7 +4,6 @@ using namespace std;
 template <typename T>
 class AVL
 {
-private:
 public:
     class node
     {
@@ -29,7 +28,7 @@ public:
     }
     void remove(T x)
     {
-        removeUtil(root,x);
+        root = removeUtil(root,x);
     }
     node *search(T x)
     {
@@ -187,7 +186,7 @@ private:
         if (d > 1)
         {
             int ld = height(head->left->left) - height(head->left->right);
-            if (ld > 1)
+            if (ld > 1 || ld==0)
             {
                 // LL
                 return rightRotation(head);
@@ -202,15 +201,15 @@ private:
         else if (d < -1)
         {
             int rd = height(head->right->left) - height(head->right->right);
-            if (rd > 1)
+            if (rd < -1 || rd==0)
             {
-                // RL
-                head->right = rightRotation(head->right);
+                // RR
                 return leftRotatation(head);
             }
             else
             {
-                // RR
+                // RL
+                head->right = rightRotation(head->right);
                 return leftRotatation(head);
             }
         }
@@ -234,4 +233,15 @@ int main(int argc, char const *argv[])
     t.insert(99);
     t.insert(98);
     t.print();
+
+    AVL<int> t2;
+    t2.insert(1);
+    t2.insert(2);
+    t2.insert(4);
+    t2.insert(3);
+    t2.insert(5);
+    t2.remove(1);
+    t2.remove(5);
+    t2.print();
 }
+
