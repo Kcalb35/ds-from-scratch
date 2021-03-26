@@ -76,7 +76,7 @@ int Heap::DeleteMax(){
     for(parent=1;parent*2<=size;parent = child){
         child = parent*2;
         // if parent has right son
-        if ((child!=size)&&(element[child]<element[child+1]){}){
+        if ((child!=size)&&(element[child]<element[child+1])){
             child++;
         }
         if (tmp>=element[child]) break;
